@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrderMapper">
+
+  <resultMap id="baseMap" type="com.framework.entity.base.Order">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="number" property="number" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <select id="listAllOrder" resultType="pd" parameterType="pd">
+    SELECT
+    bo.id,
+    bo.number,
+    bo.shipment_date shipmentDate,
+    bo.real_date realDate,
+    bu.company_name companyName,
+    ba.address,
+    bc.id contract
+    FROM
+    biz_order bo
+    LEFT JOIN biz_user bu ON bo.consignor_id = bu.sys_user_id
+    LEFT JOIN biz_address ba ON ba.id = bo.address_id
+    LEFT JOIN biz_contract bc ON bc.order_id = bo.id
+    WHERE 1=1
+    <if test="userId != null">
+      and bu.sys_user_id = #{userId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http//mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="IncomeOrderMapper">
+
+    <select id="listIncomeOrder" parameterType="page" resultType="pd">
+        SELECT
+        `oi`.`id`,
+        `oi`.`book_month`,
+        `oi`.`material_code`,
+        `oi`.`material_desc`,
+        `oi`.`comment`,
+        `oi`.`order_code`,
+        `oi`.`consume_user_id`,
+        `oi`.`price_unit`,
+        `oi`.`price`,
+        `oi`.`count_unit`,
+        `oi`.`place_count`,
+        `oi`.`sell_count`,
+        `oi`.`payment_money`,
+        `oi`.`place_date`,
+        `oi`.`require_date`,
+        `oi`.`reality_date`,
+        `oi`.`freight_order_code`,
+        `oi`.`freight_money`,
+        `oi`.`storage_money`,
+        `oi`.`is_payment`,
+        `oi`.`cdate`,
+        `oi`.`udate`,
+        `oi`.`status`
+        FROM
+        `biz_order_income` AS oi
+        WHERE 1=1
+        <if test="pd.bookMonth != null and pd.bookMonth != ''">
+            AND oi.`book_month` = #{pd.bookMonth}
+        </if>
+        <if test="pd.placeDate != null and pd.placeDate != ''">
+            AND oi.`place_date` = #{pd.placeDate}
+        </if>
+        <!-- TODO consumeName -->
+        <!-- TODO 原厂-->
+        <!-- TODO 供应商-->
+        <if test="pd.isPayment != null and pd.isPayment != '-1'">
+            AND oi.`is_payment` = #{pd.isPayment}
+        </if>
+        <!-- TODO 是否开票 -->
+        <if test="pd.status != null and pd.status != '-1'">
+            AND oi.`status` = #{pd.status}
+        </if>
+    </select>
+
+    <insert id="addIncomeOrder" parameterType="pd">
+        INSERT INTO `biz_order_income` (`book_month`,`material_code`,`status`) VALUES (#{bookMonth},#{materialCode},#{status})
+    </insert>
+
+    <update id="updateIncomeOrder" parameterType="pd">
+        UPDATE  `biz_order_income`
+            SET `book_month` = #{bookMonth},
+                `material_code` = #{materialCode},
+                `status` = #{status}
+        WHERE `id` = #{id}
+    </update>
+
+    <select id="loadIncomeOrder" parameterType="int" resultType="map">
+        SELECT * FROM `biz_order_income` AS oi WHERE `id` = #{id}
+    </select>
+
+</mapper>

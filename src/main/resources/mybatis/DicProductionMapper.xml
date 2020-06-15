@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greathammer.dao.DicProductionMapper">
+    <resultMap id="BaseResultMap" type="com.greathammer.entity.DicProduction">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="category_id" property="categoryId" jdbcType="INTEGER"/>
+        <result column="category_name" property="categoryName" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="comment" property="comment" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="pack" property="pack" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="min_quantity" property="minQuantity" jdbcType="INTEGER"/>
+        <result column="sequence" property="sequence" jdbcType="INTEGER"/>
+        <result column="creator_id" property="creatorId" jdbcType="INTEGER"/>
+        <result column="cdate" property="cdate" jdbcType="TIMESTAMP"/>
+        <result column="udate" property="udate" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.greathammer.entity.DicProduction" extends="BaseResultMap">
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, category_id, number, name, comment, price, pack, unit, min_quantity, sequence,
+        creator_id, cdate, udate, status
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from dic_production
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM dic_production
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.greathammer.entity.DicProduction">
+        INSERT INTO dic_production (id, category_id, number,
+                                    name, comment, price,
+                                    pack, unit, min_quantity,
+                                    sequence, creator_id, cdate,
+                                    udate, status, content
+        )
+        VALUES (#{id,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR},
+                                        #{name,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+                                        #{pack,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{minQuantity,jdbcType=INTEGER},
+                                        #{sequence,jdbcType=INTEGER}, #{creatorId,jdbcType=INTEGER}, #{cdate,jdbcType=TIMESTAMP},
+                #{udate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.greathammer.entity.DicProduction">
+        insert into dic_production
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="categoryId != null">
+                category_id,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="pack != null">
+                pack,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="minQuantity != null">
+                min_quantity,
+            </if>
+            <if test="sequence != null">
+                sequence,
+            </if>
+            <if test="creatorId != null">
+                creator_id,
+            </if>
+            <if test="cdate != null">
+                cdate,
+            </if>
+            <if test="udate != null">
+                udate,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="categoryId != null">
+                #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="pack != null">
+                #{pack,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="minQuantity != null">
+                #{minQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="sequence != null">
+                #{sequence,jdbcType=INTEGER},
+            </if>
+            <if test="creatorId != null">
+                #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="cdate != null">
+                #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="udate != null">
+                #{udate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.greathammer.entity.DicProduction">
+        update dic_production
+        <set>
+            <if test="categoryId != null">
+                category_id = #{categoryId,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null">
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="pack != null">
+                pack = #{pack,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="minQuantity != null">
+                min_quantity = #{minQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="sequence != null">
+                sequence = #{sequence,jdbcType=INTEGER},
+            </if>
+            <if test="creatorId != null">
+                creator_id = #{creatorId,jdbcType=INTEGER},
+            </if>
+            <if test="cdate != null">
+                cdate = #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="udate != null">
+                udate = #{udate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.greathammer.entity.DicProduction">
+        UPDATE dic_production
+        SET category_id  = #{categoryId,jdbcType=INTEGER},
+            number       = #{number,jdbcType=VARCHAR},
+            name         = #{name,jdbcType=VARCHAR},
+            comment      = #{comment,jdbcType=VARCHAR},
+            price        = #{price,jdbcType=DECIMAL},
+            pack         = #{pack,jdbcType=VARCHAR},
+            unit         = #{unit,jdbcType=VARCHAR},
+            min_quantity = #{minQuantity,jdbcType=INTEGER},
+            sequence     = #{sequence,jdbcType=INTEGER},
+            creator_id   = #{creatorId,jdbcType=INTEGER},
+            cdate        = #{cdate,jdbcType=TIMESTAMP},
+            udate        = #{udate,jdbcType=TIMESTAMP},
+            status       = #{status,jdbcType=INTEGER},
+            content      = #{content,jdbcType=LONGVARCHAR}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.greathammer.entity.DicProduction">
+        UPDATE dic_production
+        SET category_id  = #{categoryId,jdbcType=INTEGER},
+            number       = #{number,jdbcType=VARCHAR},
+            name         = #{name,jdbcType=VARCHAR},
+            comment      = #{comment,jdbcType=VARCHAR},
+            price        = #{price,jdbcType=DECIMAL},
+            pack         = #{pack,jdbcType=VARCHAR},
+            unit         = #{unit,jdbcType=VARCHAR},
+            min_quantity = #{minQuantity,jdbcType=INTEGER},
+            sequence     = #{sequence,jdbcType=INTEGER},
+            creator_id   = #{creatorId,jdbcType=INTEGER},
+            cdate        = #{cdate,jdbcType=TIMESTAMP},
+            udate        = #{udate,jdbcType=TIMESTAMP},
+            status       = #{status,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <!-- 用户列表(用户组) -->
+    <select id="searchListPage" parameterType="paging" resultMap="ResultMapWithBLOBs">
+        SELECT
+        `p`.`id`,
+        `p`.`category_id`,
+        `p`.`number`,
+        `p`.`name`,
+        `p`.`comment`,
+        `p`.`price`,
+        `p`.`pack`,
+        `p`.`unit`,
+        `p`.`min_quantity`,
+        `p`.`sequence`,
+        `p`.`creator_id`,
+        `p`.`cdate`,
+        `p`.`udate`,
+        `p`.`status`,
+        `c`.`name` as category_name
+        FROM
+        `dic_production` AS p LEFT OUTER JOIN `dic_category` AS c ON p.category_id = c.id
+        WHERE 1=1
+        <if test="pd != null">
+            <if test="pd.categoryId != null and pd.categoryId != ''">
+                AND c.id = #{pd.categoryId}
+            </if>
+            <if test="pd.number != null and pd.number != ''">
+                AND p.number LIKE concat('%', #{pd.number}, '%')
+            </if>
+            <if test="pd.name != null and pd.name != ''">
+                AND p.`name` LIKE concat('%', #{pd.name}, '%')
+            </if>
+            <if test="pd.content != null and pd.content != ''">
+                AND p.content LIKE concat('%', #{pd.content}, '%')
+            </if>
+            <if test="pd.status != null and pd.status != '-1'">
+                AND p.`status` = #{pd.status}
+            </if>
+        </if>
+    </select>
+
+    <!-- ajax产品列表 -->
+    <select id="ajaxSearchListPage" parameterType="ajaxPaging" resultMap="BaseResultMap">
+        SELECT
+        `p`.`id`,
+        `p`.`category_id`,
+        `p`.`number`,
+        `p`.`name`,
+        `p`.`comment`,
+        `p`.`price`,
+        `p`.`pack`,
+        `p`.`unit`,
+        `p`.`min_quantity`,
+        `p`.`sequence`,
+        `p`.`creator_id`,
+        `p`.`cdate`,
+        `p`.`udate`,
+        `p`.`status`,
+        `c`.`name` as category_name
+        FROM
+        `dic_production` AS p LEFT OUTER JOIN `dic_category` AS c ON p.category_id = c.id
+        WHERE 1=1
+        <if test="pd != null">
+            <if test="pd.categoryId != null and pd.categoryId != ''">
+                AND c.id = #{pd.categoryId}
+            </if>
+            <if test="pd.number != null and pd.number != ''">
+                AND p.number LIKE concat('%', #{pd.number}, '%')
+            </if>
+            <if test="pd.name != null and pd.name != ''">
+                AND p.`name` LIKE concat('%', #{pd.name}, '%')
+            </if>
+            <if test="pd.content != null and pd.content != ''">
+                AND p.content LIKE concat('%', #{pd.content}, '%')
+            </if>
+            <if test="pd.status != null and pd.status != '-1'">
+                AND p.`status` = #{pd.status}
+            </if>
+        </if>
+    </select>
+
+    <insert id="addProduction" parameterType="pd" flushCache="false">
+        INSERT INTO `dic_production`
+        (
+            `category_id`,
+            `number`,
+            `name`,
+            `content`,
+            `comment`,
+            `price`,
+            `pack`,
+            `unit`,
+            `min_quantity`,
+            `sequence`,
+            `creator_id`,
+            `status`)
+        VALUES
+            (#{categoryId},
+                #{number},
+                #{name},
+                #{content},
+                #{comment},
+                #{price},
+                #{pack},
+                #{unit},
+                #{minQuantity},
+                #{sequence},
+                #{creatorId},
+             #{status})
+    </insert>
+
+    <select id="loadProduction" parameterType="int" resultType="map">
+        SELECT *
+        FROM dic_production AS p
+        WHERE p.id = #{productionId}
+    </select>
+
+    <!--<select id="viewProduction" parameterType="int" resultType="map">-->
+    <!--</select>-->
+
+    <update id="updateProduction" parameterType="pd" flushCache="false">
+        UPDATE `dic_production`
+        SET
+            `category_id`  = #{categoryId},
+            `number`       = #{number},
+            `name`         = #{name},
+            `content`      = #{content},
+            `comment`      = #{comment},
+            `price`        = #{price},
+            `pack`         = #{pack},
+            `unit`         = #{unit},
+            `min_quantity` = #{minQuantity},
+            `udate`        = NOW(),
+            `status`       = #{status}
+        WHERE `id` = #{id}
+    </update>
+    <select id="listProduction" parameterType="string" resultType="com.greathammer.entity.DicProduction">
+        SELECT
+        *
+        FROM dic_production
+        WHERE name LIKE concat('%' , #{term} , '%')
+    </select>
+
+</mapper>

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greathammer.dao.BizPriceMapper">
+    <resultMap id="BaseResultMap" type="com.greathammer.entity.BizPrice">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="production_id" property="productionId" jdbcType="INTEGER"/>
+        <result column="biz_user_id" property="bizUserId" jdbcType="VARCHAR"/>
+        <result column="rmb_price" property="rmbPrice" jdbcType="REAL"/>
+        <result column="dollar_price" property="dollarPrice" jdbcType="REAL"/>
+        <result column="price_unit" property="priceUnit" jdbcType="VARCHAR"/>
+        <result column="effective_start_date" property="effectiveStartDate" jdbcType="TIMESTAMP"/>
+        <result column="effective_end_date" property="effectiveEndDate" jdbcType="TIMESTAMP"/>
+        <result column="operator_id" property="operatorId" jdbcType="VARCHAR"/>
+        <result column="operation_date" property="operationDate" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, production_id, biz_user_id, rmb_price, dollar_price, price_unit, effective_start_date,
+        effective_end_date, operator_id, operation_date, status
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_price
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM biz_price
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.greathammer.entity.BizPrice">
+        INSERT INTO biz_price (id, production_id, biz_user_id,
+                               rmb_price, dollar_price, price_unit,
+                               effective_start_date, effective_end_date,
+                               operator_id, operation_date, status
+        )
+        VALUES (#{id,jdbcType=INTEGER}, #{productionId,jdbcType=INTEGER}, #{bizUserId,jdbcType=VARCHAR},
+                                        #{rmbPrice,jdbcType=REAL}, #{dollarPrice,jdbcType=REAL}, #{priceUnit,jdbcType=VARCHAR},
+                                        #{effectiveStartDate,jdbcType=TIMESTAMP}, #{effectiveEndDate,jdbcType=TIMESTAMP},
+                                        #{operatorId,jdbcType=VARCHAR}, #{operationDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.greathammer.entity.BizPrice">
+        insert into biz_price
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="productionId != null">
+                production_id,
+            </if>
+            <if test="bizUserId != null">
+                biz_user_id,
+            </if>
+            <if test="rmbPrice != null">
+                rmb_price,
+            </if>
+            <if test="dollarPrice != null">
+                dollar_price,
+            </if>
+            <if test="priceUnit != null">
+                price_unit,
+            </if>
+            <if test="effectiveStartDate != null">
+                effective_start_date,
+            </if>
+            <if test="effectiveEndDate != null">
+                effective_end_date,
+            </if>
+            <if test="operatorId != null">
+                operator_id,
+            </if>
+            <if test="operationDate != null">
+                operation_date,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="productionId != null">
+                #{productionId,jdbcType=INTEGER},
+            </if>
+            <if test="bizUserId != null">
+                #{bizUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="rmbPrice != null">
+                #{rmbPrice,jdbcType=REAL},
+            </if>
+            <if test="dollarPrice != null">
+                #{dollarPrice,jdbcType=REAL},
+            </if>
+            <if test="priceUnit != null">
+                #{priceUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="effectiveStartDate != null">
+                #{effectiveStartDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effectiveEndDate != null">
+                #{effectiveEndDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operatorId != null">
+                #{operatorId,jdbcType=VARCHAR},
+            </if>
+            <if test="operationDate != null">
+                #{operationDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.greathammer.entity.BizPrice">
+        update biz_price
+        <set>
+            <if test="productionId != null">
+                production_id = #{productionId,jdbcType=INTEGER},
+            </if>
+            <if test="bizUserId != null">
+                biz_user_id = #{bizUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="rmbPrice != null">
+                rmb_price = #{rmbPrice,jdbcType=REAL},
+            </if>
+            <if test="dollarPrice != null">
+                dollar_price = #{dollarPrice,jdbcType=REAL},
+            </if>
+            <if test="priceUnit != null">
+                price_unit = #{priceUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="effectiveStartDate != null">
+                effective_start_date = #{effectiveStartDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="effectiveEndDate != null">
+                effective_end_date = #{effectiveEndDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operatorId != null">
+                operator_id = #{operatorId,jdbcType=VARCHAR},
+            </if>
+            <if test="operationDate != null">
+                operation_date = #{operationDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.greathammer.entity.BizPrice">
+        UPDATE biz_price
+        SET production_id        = #{productionId,jdbcType=INTEGER},
+            biz_user_id          = #{bizUserId,jdbcType=VARCHAR},
+            rmb_price            = #{rmbPrice,jdbcType=REAL},
+            dollar_price         = #{dollarPrice,jdbcType=REAL},
+            price_unit           = #{priceUnit,jdbcType=VARCHAR},
+            effective_start_date = #{effectiveStartDate,jdbcType=TIMESTAMP},
+            effective_end_date   = #{effectiveEndDate,jdbcType=TIMESTAMP},
+            operator_id          = #{operatorId,jdbcType=VARCHAR},
+            operation_date       = #{operationDate,jdbcType=TIMESTAMP},
+            status               = #{status,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <resultMap id="ProductionAndPriceResultMap" type="com.greathammer.entity.BizPrice">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="biz_user_id" property="bizUserId" jdbcType="VARCHAR"/>
+        <result column="production_id" property="productionId" jdbcType="INTEGER"/>
+        <result column="rmb_price" property="rmbPrice" jdbcType="DECIMAL"/>
+        <result column="dollar_price" property="dollarPrice" jdbcType="DECIMAL"/>
+        <result column="price_unit" property="priceUnit" jdbcType="VARCHAR"/>
+        <result column="effective_start_date" property="effectiveStartDate" jdbcType="TIMESTAMP"/>
+        <result column="effective_end_date" property="effectiveEndDate" jdbcType="TIMESTAMP"/>
+        <result column="operator_id" property="operatorId" jdbcType="VARCHAR"/>
+        <result column="operation_date" property="operationDate" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+
+        <result column="production_id" property="dicProduction.id" jdbcType="INTEGER"/>
+        <result column="category_id" property="dicProduction.categoryId" jdbcType="INTEGER"/>
+        <result column="category_name" property="dicProduction.categoryName" jdbcType="VARCHAR"/>
+        <result column="number" property="dicProduction.number" jdbcType="VARCHAR"/>
+        <result column="name" property="dicProduction.name" jdbcType="VARCHAR"/>
+        <result column="comment" property="dicProduction.comment" jdbcType="VARCHAR"/>
+        <result column="production_price" property="dicProduction.price" jdbcType="DECIMAL"/>
+        <result column="pack" property="dicProduction.pack" jdbcType="VARCHAR"/>
+        <result column="unit" property="dicProduction.unit" jdbcType="VARCHAR"/>
+        <result column="min_quantity" property="dicProduction.minQuantity" jdbcType="INTEGER"/>
+        <result column="sequence" property="dicProduction.sequence" jdbcType="INTEGER"/>
+        <result column="creator_id" property="dicProduction.creatorId" jdbcType="INTEGER"/>
+        <result column="cdate" property="dicProduction.cdate" jdbcType="TIMESTAMP"/>
+        <result column="udate" property="dicProduction.udate" jdbcType="TIMESTAMP"/>
+        <result column="production_status" property="dicProduction.status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!-- 用户列表(用户组) -->
+    <select id="searchListPage" parameterType="paging" resultMap="ProductionAndPriceResultMap">
+        SELECT
+        `p`.`id` AS production_id,
+        `p`.`category_id`,
+        `p`.`number`,
+        `p`.`name`,
+        `p`.`comment`,
+        `p`.`price` AS production_price,
+        `p`.`pack`,
+        `p`.`unit`,
+        `p`.`min_quantity`,
+        `p`.`sequence`,
+        `p`.`creator_id`,
+        `p`.`cdate`,
+        `p`.`udate`,
+        `p`.`status` AS production_status,
+        `c`.`name` AS category_name,
+        `e`.`id`,
+        # `e`.`production_id`,
+        `e`.`biz_user_id`,
+        `e`.`rmb_price`,
+        `e`.`dollar_price`,
+        `e`.`price_unit`,
+        `e`.`effective_start_date`,
+        `e`.`effective_end_date`,
+        `e`.`operator_id`,
+        `e`.`operation_date`,
+        `e`.`status`
+        FROM
+        `dic_production` AS p
+        LEFT OUTER JOIN
+        `dic_category` AS c ON p.category_id = c.id
+        LEFT OUTER JOIN
+        biz_price AS e ON p.id = e.production_id
+        WHERE
+        1 = 1
+        <if test="pd != null and pd.dicProduction != null">
+            <if test="pd.dicProduction.categoryId != null and pd.dicProduction.categoryId != ''">
+                AND c.id = #{pd.dicProduction.categoryId}
+            </if>
+            <if test="pd.dicProduction.number != null and pd.dicProduction.number != ''">
+                AND p.number LIKE concat('%', #{pd.dicProduction.number}, '%')
+            </if>
+            <if test="pd.dicProduction.name != null and pd.dicProduction.name != ''">
+                AND p.`name` LIKE concat('%', #{pd.dicProduction.name}, '%')
+            </if>
+            <if test="pd.dicProduction.content != null and pd.dicProduction.content != ''">
+                AND p.content LIKE concat('%', #{pd.dicProduction.content}, '%')
+            </if>
+            <if test="pd.dicProduction.status != null and pd.dicProduction.status != '-1'">
+                AND p.`status` = #{pd.dicProduction.status}
+            </if>
+        </if>
+    </select>
+
+  <select id="ajaxSearchListPage" parameterType="ajaxPaging" resultMap="BaseResultMap">
+    SELECT
+    `p`.`id` AS production_id,
+    `p`.`category_id`,
+    `p`.`number`,
+    `p`.`name`,
+    `p`.`comment`,
+    `p`.`price` AS production_price,
+    `p`.`pack`,
+    `p`.`unit`,
+    `p`.`min_quantity`,
+    `p`.`sequence`,
+    `p`.`creator_id`,
+    `p`.`cdate`,
+    `p`.`udate`,
+    `p`.`status` AS production_status,
+    `c`.`name` AS category_name,
+    `e`.`id`,
+    # `e`.`production_id`,
+    `e`.`biz_user_id`,
+    `e`.`rmb_price`,
+    `e`.`dollar_price`,
+    `e`.`price_unit`,
+    `e`.`effective_start_date`,
+    `e`.`effective_end_date`,
+    `e`.`operator_id`,
+    `e`.`operation_date`,
+    `e`.`status`
+    FROM
+    `dic_production` AS p
+    LEFT OUTER JOIN
+    `dic_category` AS c ON p.category_id = c.id
+    LEFT OUTER JOIN
+    biz_price AS e ON p.id = e.production_id
+    WHERE
+    1 = 1
+    <if test="pd != null and pd.dicProduction != null">
+      <if test="pd.dicProduction.categoryId != null and pd.dicProduction.categoryId != ''">
+        AND c.id = #{pd.dicProduction.categoryId}
+      </if>
+      <if test="pd.dicProduction.number != null and pd.dicProduction.number != ''">
+        AND p.number LIKE concat('%', #{pd.dicProduction.number}, '%')
+      </if>
+      <if test="pd.dicProduction.name != null and pd.dicProduction.name != ''">
+        AND p.`name` LIKE concat('%', #{pd.dicProduction.name}, '%')
+      </if>
+      <if test="pd.dicProduction.content != null and pd.dicProduction.content != ''">
+        AND p.content LIKE concat('%', #{pd.dicProduction.content}, '%')
+      </if>
+      <if test="pd.dicProduction.status != null and pd.dicProduction.status != '-1'">
+        AND p.`status` = #{pd.dicProduction.status}
+      </if>
+    </if>
+  </select>
+
+</mapper>

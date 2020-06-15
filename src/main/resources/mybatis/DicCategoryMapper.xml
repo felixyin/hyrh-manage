@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greathammer.dao.DicCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.greathammer.entity.DicCategory" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="p_id" property="pId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, p_id, name, cdate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dic_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dic_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.greathammer.entity.DicCategory" >
+    insert into dic_category (id, p_id, name, 
+      cdate)
+    values (#{id,jdbcType=INTEGER}, #{pId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{cdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.greathammer.entity.DicCategory" >
+    insert into dic_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.greathammer.entity.DicCategory" >
+    update dic_category
+    <set >
+      <if test="pId != null" >
+        p_id = #{pId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.greathammer.entity.DicCategory" >
+    update dic_category
+    set p_id = #{pId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      cdate = #{cdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+
+
+  <!-- 用户列表(用户组) -->
+  <select id="listCategory" resultType="map" useCache="false">
+    SELECT
+    `c`.`id`,
+    `c`.`p_id` AS pId,
+    --         concat(`c`.`name`,'(产品数量:',COUNT(p.id),')') AS name,
+    `c`.`name`,
+    `c`.`cdate`,
+    'true' AS `open`,
+    COUNT(p.id) AS productionCount
+    FROM
+    `dic_category` AS c
+    LEFT OUTER JOIN
+    dic_production AS p ON c.id = p.category_id
+    GROUP BY c.id , c.p_id , c.`name` , c.cdate
+  </select>
+
+  <update id="saveCategory">
+    INSERT INTO `dic_category`
+    (`id`,
+    `p_id`,
+    `name`)
+    VALUES
+    (#{id},
+    #{pId},
+    #{name}
+    )
+  </update>
+  <delete id="clearCategory">
+    DELETE FROM dic_category
+  </delete>
+
+</mapper>

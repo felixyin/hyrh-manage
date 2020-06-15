@@ -1,0 +1,39 @@
+.my-text-hide{
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    width:200px;
+}
+
+.my-search-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.my-search-table tr td:nth-child(odd) {
+    width: 100px;
+    height: 33px;
+}
+
+.my-search-table tr td:nth-child(even) {
+    width: 200px;
+    height: 33px;
+}
+
+.my-search-table tr td:nth-last-child(1) {
+    width: auto;
+    float: right;
+}
+
+.my-search-table input {
+    width: 180px;
+    height: 30px;
+    font-size: 13px;
+}
+
+.my-search-table select {
+    width: 180px;
+    height: 30px;
+    font-size: 13px;
+}

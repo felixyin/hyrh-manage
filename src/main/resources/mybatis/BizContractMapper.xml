@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greathammer.dao.BizContractMapper">
+    <resultMap id="BaseResultMap" type="com.greathammer.entity.BizContract">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="content_number" property="contentNumber" jdbcType="VARCHAR"/>
+        <result column="type_contract_id" property="typeContractId" jdbcType="INTEGER"/>
+        <result column="order_code" property="orderCode" jdbcType="VARCHAR"/>
+        <result column="line_number" property="lineNumber" jdbcType="VARCHAR"/>
+        <result column="material_code" property="materialCode" jdbcType="VARCHAR"/>
+        <result column="material_desc" property="materialDesc" jdbcType="VARCHAR"/>
+        <result column="comment" property="comment" jdbcType="VARCHAR"/>
+        <result column="provider" property="provider" jdbcType="VARCHAR"/>
+        <result column="original" property="original" jdbcType="VARCHAR"/>
+        <result column="customer" property="customer" jdbcType="VARCHAR"/>
+        <result column="price_unit" property="priceUnit" jdbcType="VARCHAR"/>
+        <result column="count" property="count" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="unit_price" property="unitPrice" jdbcType="VARCHAR"/>
+        <result column="place_count" property="placeCount" jdbcType="VARCHAR"/>
+        <result column="sell_count" property="sellCount" jdbcType="VARCHAR"/>
+        <result column="payment_money" property="paymentMoney" jdbcType="REAL"/>
+        <result column="place_date" property="placeDate" jdbcType="TIMESTAMP"/>
+        <result column="require_date" property="requireDate" jdbcType="TIMESTAMP"/>
+        <result column="reality_date" property="realityDate" jdbcType="TIMESTAMP"/>
+        <result column="freight_order_code" property="freightOrderCode" jdbcType="VARCHAR"/>
+        <result column="freight_money" property="freightMoney" jdbcType="REAL"/>
+        <result column="freight_money_no" property="freightMoneyNo" jdbcType="REAL"/>
+        <result column="storage_money" property="storageMoney" jdbcType="REAL"/>
+        <result column="file_name" property="fileName" jdbcType="VARCHAR"/>
+        <result column="file_path" property="filePath" jdbcType="VARCHAR"/>
+        <result column="cdate" property="cdate" jdbcType="TIMESTAMP"/>
+        <result column="udate" property="udate" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, content_number, type_contract_id, order_code, line_number, material_code, material_desc,
+        comment, provider, original, customer, price_unit, count, unit, unit_price, place_count,
+        sell_count, payment_money, place_date, require_date, reality_date, freight_order_code,
+        freight_money, freight_money_no, storage_money, file_name, file_path, cdate, udate,
+        status
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from biz_contract
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM biz_contract
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.greathammer.entity.BizContract">
+        INSERT INTO biz_contract (id, content_number, type_contract_id,
+                                  order_code, line_number, material_code,
+                                  material_desc, comment, provider,
+                                  original, customer, price_unit,
+                                  count, unit, unit_price,
+                                  place_count, sell_count, payment_money,
+                                  place_date, require_date, reality_date,
+                                  freight_order_code, freight_money, freight_money_no,
+                                  storage_money, file_name, file_path,
+                                  cdate, udate, status
+        )
+        VALUES (#{id,jdbcType=INTEGER}, #{contentNumber,jdbcType=VARCHAR}, #{typeContractId,jdbcType=INTEGER},
+                                        #{orderCode,jdbcType=VARCHAR}, #{lineNumber,jdbcType=VARCHAR}, #{materialCode,jdbcType=VARCHAR},
+                                        #{materialDesc,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{provider,jdbcType=VARCHAR},
+                                        #{original,jdbcType=VARCHAR}, #{customer,jdbcType=VARCHAR}, #{priceUnit,jdbcType=VARCHAR},
+                                                                                                    #{count,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR},
+                                                                                                    #{unitPrice,jdbcType=VARCHAR},
+                                                                                                    #{placeCount,jdbcType=VARCHAR},
+                                                                                                    #{sellCount,jdbcType=VARCHAR},
+                                                                                                    #{paymentMoney,jdbcType=REAL},
+                                                                                                    #{placeDate,jdbcType=TIMESTAMP},
+                                                                                                    #{requireDate,jdbcType=TIMESTAMP},
+                                                                                                    #{realityDate,jdbcType=TIMESTAMP},
+                #{freightOrderCode,jdbcType=VARCHAR}, #{freightMoney,jdbcType=REAL}, #{freightMoneyNo,jdbcType=REAL},
+                #{storageMoney,jdbcType=REAL}, #{fileName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR},
+                #{cdate,jdbcType=TIMESTAMP}, #{udate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.greathammer.entity.BizContract">
+        insert into biz_contract
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="contentNumber != null">
+                content_number,
+            </if>
+            <if test="typeContractId != null">
+                type_contract_id,
+            </if>
+            <if test="orderCode != null">
+                order_code,
+            </if>
+            <if test="lineNumber != null">
+                line_number,
+            </if>
+            <if test="materialCode != null">
+                material_code,
+            </if>
+            <if test="materialDesc != null">
+                material_desc,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="provider != null">
+                provider,
+            </if>
+            <if test="original != null">
+                original,
+            </if>
+            <if test="customer != null">
+                customer,
+            </if>
+            <if test="priceUnit != null">
+                price_unit,
+            </if>
+            <if test="count != null">
+                count,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="unitPrice != null">
+                unit_price,
+            </if>
+            <if test="placeCount != null">
+                place_count,
+            </if>
+            <if test="sellCount != null">
+                sell_count,
+            </if>
+            <if test="paymentMoney != null">
+                payment_money,
+            </if>
+            <if test="placeDate != null">
+                place_date,
+            </if>
+            <if test="requireDate != null">
+                require_date,
+            </if>
+            <if test="realityDate != null">
+                reality_date,
+            </if>
+            <if test="freightOrderCode != null">
+                freight_order_code,
+            </if>
+            <if test="freightMoney != null">
+                freight_money,
+            </if>
+            <if test="freightMoneyNo != null">
+                freight_money_no,
+            </if>
+            <if test="storageMoney != null">
+                storage_money,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="filePath != null">
+                file_path,
+            </if>
+            <if test="cdate != null">
+                cdate,
+            </if>
+            <if test="udate != null">
+                udate,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="contentNumber != null">
+                #{contentNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="typeContractId != null">
+                #{typeContractId,jdbcType=INTEGER},
+            </if>
+            <if test="orderCode != null">
+                #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="lineNumber != null">
+                #{lineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="materialCode != null">
+                #{materialCode,jdbcType=VARCHAR},
+            </if>
+            <if test="materialDesc != null">
+                #{materialDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="provider != null">
+                #{provider,jdbcType=VARCHAR},
+            </if>
+            <if test="original != null">
+                #{original,jdbcType=VARCHAR},
+            </if>
+            <if test="customer != null">
+                #{customer,jdbcType=VARCHAR},
+            </if>
+            <if test="priceUnit != null">
+                #{priceUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                #{count,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                #{unitPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="placeCount != null">
+                #{placeCount,jdbcType=VARCHAR},
+            </if>
+            <if test="sellCount != null">
+                #{sellCount,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentMoney != null">
+                #{paymentMoney,jdbcType=REAL},
+            </if>
+            <if test="placeDate != null">
+                #{placeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="requireDate != null">
+                #{requireDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="realityDate != null">
+                #{realityDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freightOrderCode != null">
+                #{freightOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="freightMoney != null">
+                #{freightMoney,jdbcType=REAL},
+            </if>
+            <if test="freightMoneyNo != null">
+                #{freightMoneyNo,jdbcType=REAL},
+            </if>
+            <if test="storageMoney != null">
+                #{storageMoney,jdbcType=REAL},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="cdate != null">
+                #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="udate != null">
+                #{udate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.greathammer.entity.BizContract">
+        update biz_contract
+        <set>
+            <if test="contentNumber != null">
+                content_number = #{contentNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="typeContractId != null">
+                type_contract_id = #{typeContractId,jdbcType=INTEGER},
+            </if>
+            <if test="orderCode != null">
+                order_code = #{orderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="lineNumber != null">
+                line_number = #{lineNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="materialCode != null">
+                material_code = #{materialCode,jdbcType=VARCHAR},
+            </if>
+            <if test="materialDesc != null">
+                material_desc = #{materialDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="comment != null">
+                comment = #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="provider != null">
+                provider = #{provider,jdbcType=VARCHAR},
+            </if>
+            <if test="original != null">
+                original = #{original,jdbcType=VARCHAR},
+            </if>
+            <if test="customer != null">
+                customer = #{customer,jdbcType=VARCHAR},
+            </if>
+            <if test="priceUnit != null">
+                price_unit = #{priceUnit,jdbcType=VARCHAR},
+            </if>
+            <if test="count != null">
+                count = #{count,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="unitPrice != null">
+                unit_price = #{unitPrice,jdbcType=VARCHAR},
+            </if>
+            <if test="placeCount != null">
+                place_count = #{placeCount,jdbcType=VARCHAR},
+            </if>
+            <if test="sellCount != null">
+                sell_count = #{sellCount,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentMoney != null">
+                payment_money = #{paymentMoney,jdbcType=REAL},
+            </if>
+            <if test="placeDate != null">
+                place_date = #{placeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="requireDate != null">
+                require_date = #{requireDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="realityDate != null">
+                reality_date = #{realityDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="freightOrderCode != null">
+                freight_order_code = #{freightOrderCode,jdbcType=VARCHAR},
+            </if>
+            <if test="freightMoney != null">
+                freight_money = #{freightMoney,jdbcType=REAL},
+            </if>
+            <if test="freightMoneyNo != null">
+                freight_money_no = #{freightMoneyNo,jdbcType=REAL},
+            </if>
+            <if test="storageMoney != null">
+                storage_money = #{storageMoney,jdbcType=REAL},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                file_path = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="cdate != null">
+                cdate = #{cdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="udate != null">
+                udate = #{udate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.greathammer.entity.BizContract">
+        UPDATE biz_contract
+        SET content_number     = #{contentNumber,jdbcType=VARCHAR},
+            type_contract_id   = #{typeContractId,jdbcType=INTEGER},
+            order_code         = #{orderCode,jdbcType=VARCHAR},
+            line_number        = #{lineNumber,jdbcType=VARCHAR},
+            material_code      = #{materialCode,jdbcType=VARCHAR},
+            material_desc      = #{materialDesc,jdbcType=VARCHAR},
+            comment            = #{comment,jdbcType=VARCHAR},
+            provider           = #{provider,jdbcType=VARCHAR},
+            original           = #{original,jdbcType=VARCHAR},
+            customer           = #{customer,jdbcType=VARCHAR},
+            price_unit         = #{priceUnit,jdbcType=VARCHAR},
+            count              = #{count,jdbcType=VARCHAR},
+            unit               = #{unit,jdbcType=VARCHAR},
+            unit_price         = #{unitPrice,jdbcType=VARCHAR},
+            place_count        = #{placeCount,jdbcType=VARCHAR},
+            sell_count         = #{sellCount,jdbcType=VARCHAR},
+            payment_money      = #{paymentMoney,jdbcType=REAL},
+            place_date         = #{placeDate,jdbcType=TIMESTAMP},
+            require_date       = #{requireDate,jdbcType=TIMESTAMP},
+            reality_date       = #{realityDate,jdbcType=TIMESTAMP},
+            freight_order_code = #{freightOrderCode,jdbcType=VARCHAR},
+            freight_money      = #{freightMoney,jdbcType=REAL},
+            freight_money_no   = #{freightMoneyNo,jdbcType=REAL},
+            storage_money      = #{storageMoney,jdbcType=REAL},
+            file_name          = #{fileName,jdbcType=VARCHAR},
+            file_path          = #{filePath,jdbcType=VARCHAR},
+            cdate              = #{cdate,jdbcType=TIMESTAMP},
+            udate              = #{udate,jdbcType=TIMESTAMP},
+            status             = #{status,jdbcType=INTEGER}
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="ajaxSearchListPage" parameterType="ajaxPaging" resultMap="BaseResultMap">
+        SELECT
+        `bc`.`id`,
+        `bc`.`content_number`,
+        `bc`.`type_contract_id`,
+        `bc`.`order_code`,
+        `bc`.`line_number`,
+        `bc`.`material_code`,
+        `bc`.`material_desc`,
+        `bc`.`comment`,
+        `bc`.`provider`,
+        `bc`.`original`,
+        `bc`.`customer`,
+        `bc`.`price_unit`,
+        `bc`.`count`,
+        `bc`.`unit`,
+        `bc`.`unit_price`,
+        `bc`.`place_count`,
+        `bc`.`sell_count`,
+        `bc`.`payment_money`,
+        `bc`.`place_date`,
+        `bc`.`require_date`,
+        `bc`.`reality_date`,
+        `bc`.`freight_order_code`,
+        `bc`.`freight_money`,
+        `bc`.`freight_money_no`,
+        `bc`.`storage_money`,
+        `bc`.`file_name`,
+        `bc`.`file_path`,
+        `bc`.`cdate`,
+        `bc`.`udate`,
+        `bc`.`status`
+        FROM `biz_contract` AS `bc`
+        WHERE 1 =1
+       <if test="pd != null">
+            <if test="pd.orderCode != null and pd.orderCode != ''">
+                AND bc.`order_code` = #{pd.orderCode}
+            </if>
+            <if test="pd.contentNumber != null and pd.contentNumber != ''">
+                AND bc.`content_number` = #{pd.contentNumber}
+            </if>
+            <if test="pd.provider != null and pd.provider != ''">
+                AND bc.`provider` = #{pd.provider}
+            </if>
+            <if test="pd.customer != null and pd.customer != ''">
+                AND bc.`customer` = #{pd.customer}
+            </if>
+            <if test="pd.fileName != null and pd.fileName != ''">
+                AND bc.`fileName` = #{pd.fileName}
+            </if>
+        </if>
+    </select>
+</mapper>

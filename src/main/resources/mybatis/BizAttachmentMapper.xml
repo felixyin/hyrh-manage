@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greathammer.dao.BizAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.greathammer.entity.BizAttachment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="production_id" property="productionId" jdbcType="INTEGER" />
+    <result column="message_id" property="messageId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="filepath" property="filepath" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP" />
+    <result column="udate" property="udate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, production_id, message_id, order_id, type, filename, filepath, creator_id, cdate, 
+    udate, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from biz_attachment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from biz_attachment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.greathammer.entity.BizAttachment" >
+    insert into biz_attachment (id, production_id, message_id, 
+      order_id, type, filename, 
+      filepath, creator_id, cdate, 
+      udate, status)
+    values (#{id,jdbcType=INTEGER}, #{productionId,jdbcType=INTEGER}, #{messageId,jdbcType=INTEGER}, 
+      #{orderId,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR}, 
+      #{filepath,jdbcType=VARCHAR}, #{creatorId,jdbcType=INTEGER}, #{cdate,jdbcType=TIMESTAMP}, 
+      #{udate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.greathammer.entity.BizAttachment" >
+    insert into biz_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productionId != null" >
+        production_id,
+      </if>
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="filepath != null" >
+        filepath,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="cdate != null" >
+        cdate,
+      </if>
+      <if test="udate != null" >
+        udate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productionId != null" >
+        #{productionId,jdbcType=INTEGER},
+      </if>
+      <if test="messageId != null" >
+        #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="cdate != null" >
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null" >
+        #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.greathammer.entity.BizAttachment" >
+    update biz_attachment
+    <set >
+      <if test="productionId != null" >
+        production_id = #{productionId,jdbcType=INTEGER},
+      </if>
+      <if test="messageId != null" >
+        message_id = #{messageId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        filepath = #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="cdate != null" >
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null" >
+        udate = #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.greathammer.entity.BizAttachment" >
+    update biz_attachment
+    set production_id = #{productionId,jdbcType=INTEGER},
+      message_id = #{messageId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      filename = #{filename,jdbcType=VARCHAR},
+      filepath = #{filepath,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      cdate = #{cdate,jdbcType=TIMESTAMP},
+      udate = #{udate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="listAttachmentForProduction" resultMap="BaseResultMap">
+    SELECT `a`.`id`,
+    `a`.`production_id`,
+    `a`.`message_id`,
+    `a`.`order_id`,
+    `a`.`type`,
+    `a`.`filename`,
+    `a`.`filepath`,
+    `a`.`creator_id`,
+    `a`.`cdate`,
+    `a`.`udate`,
+    `a`.`status`
+    FROM biz_attachment AS a
+    WHERE a.production_id = #{productionId}
+    AND a.type = #{type}
+  </select>
+
+  <select id="loadAttachmentById" parameterType="int" resultType="map">
+    SELECT * FROM biz_attachment WHERE id = #{id}
+  </select>
+
+  <insert id="save" parameterType="map">
+    INSERT INTO `biz_attachment`
+    (
+    `production_id`,
+    `type`,
+    `filename`,
+    `filepath`,
+    `cdate`,
+    `status`)
+    VALUES
+    (
+    #{productionId},
+    #{type},
+    #{filename},
+    #{filepath},
+    #{cdate},
+    #{status}
+    )
+  </insert>
+
+  <update id="update" parameterType="map">
+    UPDATE `biz_attachment`
+    SET
+    `production_id` =#{productionId},
+    `type` =#{type},
+    `filename` =#{filename},
+    `filepath` =#{filepath},
+    `udate` =#{udate},
+    `status` =#{status}
+    WHERE `id` =#{id};
+  </update>
+
+  <delete id="delete" parameterType="int">
+    DELETE FROM biz_attachment WHERE id = #{id}
+  </delete>
+
+</mapper>

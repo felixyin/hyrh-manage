@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.greathammer.dao.BizAddressMapper">
+  <resultMap id="BaseResultMap" type="com.greathammer.entity.BizAddress">
+    <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="consignee_id" property="consigneeId" jdbcType="INTEGER"/>
+    <result column="address" property="address" jdbcType="VARCHAR"/>
+    <result column="cdate" property="cdate" jdbcType="TIMESTAMP"/>
+    <result column="udate" property="udate" jdbcType="TIMESTAMP"/>
+    <result column="consignee_name" property="consigneeName" jdbcType="VARCHAR"/>
+    <result column="consignee_phone" property="consigneePhone" jdbcType="VARCHAR"/>
+    <result column="status" property="status" jdbcType="INTEGER"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, consignee_id, address, cdate, udate, consignee_name, consignee_phone, status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from biz_address
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    DELETE FROM biz_address
+    WHERE id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.greathammer.entity.BizAddress">
+    INSERT INTO biz_address (id, consignee_id, address,
+    cdate, udate, consignee_name,
+    consignee_phone, status)
+    VALUES (#{id,jdbcType=INTEGER}, #{consigneeId,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR},
+    #{cdate,jdbcType=TIMESTAMP}, #{udate,jdbcType=TIMESTAMP}, #{consigneeName,jdbcType=VARCHAR},
+    #{consigneePhone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.greathammer.entity.BizAddress">
+    insert into biz_address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="consigneeId != null">
+        consignee_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="cdate != null">
+        cdate,
+      </if>
+      <if test="udate != null">
+        udate,
+      </if>
+      <if test="consigneeName != null">
+        consignee_name,
+      </if>
+      <if test="consigneePhone != null">
+        consignee_phone,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="consigneeId != null">
+        #{consigneeId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null">
+        #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consigneeName != null">
+        #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null">
+        #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.greathammer.entity.BizAddress">
+    update biz_address
+    <set>
+      <if test="consigneeId != null">
+        consignee_id = #{consigneeId,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cdate != null">
+        cdate = #{cdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="udate != null">
+        udate = #{udate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="consigneeName != null">
+        consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      </if>
+      <if test="consigneePhone != null">
+        consignee_phone = #{consigneePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.greathammer.entity.BizAddress">
+    UPDATE biz_address
+    SET consignee_id = #{consigneeId,jdbcType=INTEGER},
+    address = #{address,jdbcType=VARCHAR},
+    cdate = #{cdate,jdbcType=TIMESTAMP},
+    udate = #{udate,jdbcType=TIMESTAMP},
+    consignee_name = #{consigneeName,jdbcType=VARCHAR},
+      consignee_phone = #{consigneePhone,jdbcType=VARCHAR},
+    status = #{status,jdbcType=INTEGER}
+    WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <insert id="addAddressInfo" parameterType="pd">
+    INSERT INTO `biz_address`
+    (`consignee_id`, `address`, `consignee_name`, `consignee_phone`)
+    VALUES
+      (#{consigneeId}, #{address}, #{consigneeName}, #{consigneePhone})
+  </insert>
+
+  <select id="listAddress" parameterType="int" resultType="map">
+    SELECT
+      `addr`.`id`,
+      `addr`.`consignee_id`,
+      `addr`.`address`,
+      `addr`.`consignee_name`,
+      `addr`.`consignee_phone`,
+      `addr`.`cdate`,
+      `addr`.`udate`,
+      `addr`.`status`
+    FROM
+      `biz_address` AS `addr`
+    WHERE `addr`.`consignee_id` = #{consigneeId}
+  </select>
+
+  <select id="loadAddressInfo" parameterType="String" resultType="map">
+    SELECT
+      `addr`.`id`,
+      `addr`.`consignee_id`,
+      `addr`.`address`,
+      `addr`.`consignee_name`,
+      `addr`.`consignee_phone`,
+      `addr`.`cdate`,
+      `addr`.`udate`,
+      `addr`.`status`
+    FROM
+      `biz_address` AS `addr`
+    WHERE `id` = #{id}
+  </select>
+
+  <update id="updateAddressInfo" parameterType="pd">
+    UPDATE `biz_address`
+    SET
+      `address`         = #{address},
+      `consignee_name`  = #{consigneeName},
+      `consignee_phone` = #{consigneePhone}
+    WHERE `id` = #{id}
+  </update>
+
+  <update id="updateDefaultAddress" parameterType="pd">
+    UPDATE `biz_address`
+    SET
+      `status` = #{status}
+    WHERE `id` = #{id}
+  </update>
+
+  <update id="resetDefaultAddress" parameterType="pd">
+    UPDATE `biz_address`
+    SET
+      `status` = #{status}
+    WHERE `consignee_id` = #{consigneeId}
+  </update>
+
+  <delete id="deleteAddressInfo" parameterType="String">
+    DELETE FROM biz_address
+    WHERE id = #{id}
+  </delete>
+
+</mapper>
